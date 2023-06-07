@@ -6,10 +6,58 @@ generator client {
 }
 
 generator erd {
-	provider = "prisma-erd-generator"
+  provider = "prisma-erd-generator"
 }
 
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id               String    @id @default(uuid())
+  taxPayerRegistry String
+  email            String    @unique
+  name             String
+  password         String
+  Company          Company[]
+}
+
+model Address {
+  id       String    @id @default(uuid())
+  zipcode  String
+  street   String
+  number   String
+  district String
+  Company  Company[]
+  Client   Client[]
+}
+
+model Company {
+  id                 String   @id @default(uuid())
+  representativeId   String
+  addressId          String?
+  registrationNumber String
+  companyName        String
+  tradingName        String?
+  phone              String?
+  email              String?
+  user               User     @relation(fields: [representativeId], references: [id])
+  address            Address? @relation(fields: [addressId], references: [id])
+}
+
+model Client {
+  id                 String  @id @default(uuid())
+  name               String?
+  taxPayerRegistry   String?
+  registrationNumber String?
+  companyName        String?
+  tradingName        String?
+  phone              String?
+  email              String?
+  addressId          String?
+
+  address Address? @relation(fields: [addressId], references: [id])
+}
+
+
