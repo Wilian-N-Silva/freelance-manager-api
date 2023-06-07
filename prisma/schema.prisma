@@ -16,8 +16,8 @@ datasource db {
 
 model User {
   id               String    @id @default(uuid())
-  taxPayerRegistry String @unique
-  email            String    
+  taxPayerRegistry String    @unique
+  email            String
   name             String
   password         String
   Company          Company[]
@@ -25,10 +25,10 @@ model User {
 
 model Address {
   id       String    @id @default(uuid())
-  zipcode  String
-  street   String
-  number   String
-  district String
+  zipcode  String?
+  street   String?
+  number   String?
+  district String?
   Company  Company[]
   Client   Client[]
 }
@@ -47,7 +47,10 @@ model Company {
 }
 
 model Client {
-  id                 String  @id @default(uuid())
+  id String @id @unique @default(uuid())
+
+  isCompany Boolean @default(true)
+
   name               String?
   taxPayerRegistry   String?
   registrationNumber String?
@@ -59,5 +62,3 @@ model Client {
 
   address Address? @relation(fields: [addressId], references: [id])
 }
-
-

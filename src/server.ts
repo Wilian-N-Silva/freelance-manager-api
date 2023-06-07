@@ -3,8 +3,9 @@ import 'dotenv/config'
 import fastify from "fastify";
 import cors from '@fastify/cors'
 import jwt from '@fastify/jwt'
-import { testRoutes } from "./routes/tests";
+
 import { authRoutes } from './routes/auth';
+import { clientRoutes } from './routes/client';
 
 
 const app = fastify()
@@ -17,8 +18,8 @@ app.register(jwt, {
   secret: 'super',
 })
 
-app.register(testRoutes)
 app.register(authRoutes)
+app.register(clientRoutes)
 
 
 app.listen({
