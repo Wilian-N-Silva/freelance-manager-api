@@ -16,8 +16,8 @@ datasource db {
 
 model User {
   id               String    @id @default(uuid())
-  taxPayerRegistry String
-  email            String    @unique
+  taxPayerRegistry String @unique
+  email            String    
   name             String
   password         String
   Company          Company[]
