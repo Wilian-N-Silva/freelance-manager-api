@@ -6,7 +6,7 @@ import jwt from '@fastify/jwt'
 
 import { authRoutes } from './routes/auth';
 import { clientRoutes } from './routes/client';
-
+import { companyRoutes } from './routes/company';
 
 export const app = fastify()
 
@@ -19,6 +19,7 @@ app.register(jwt, {
 })
 
 app.register(authRoutes)
+app.register(companyRoutes)
 app.register(clientRoutes)
 
 
@@ -26,6 +27,5 @@ app.listen({
   port: 3333,
   host: '0.0.0.0',
 }).then(() => {
-
   console.log(`HTTP server running on http://localhost:${process.env.HTTP_PORT}`)
 })
