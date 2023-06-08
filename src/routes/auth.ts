@@ -6,7 +6,7 @@ import { prisma } from "../lib/prisma";
 
 
 export async function authRoutes(app: FastifyInstance) {
-  app.post('/register', async (request) => {
+  app.post('/signup', async (request) => {
     const bodySchema = z.object({
       taxPayerRegistry: z.string(),
       name: z.string(),
@@ -34,9 +34,10 @@ export async function authRoutes(app: FastifyInstance) {
         }
       })
     }
+
   })
 
-  app.post('/signin', async (request) => {
+  app.post('/authenticate', async (request) => {
     const bodySchema = z.object({
       email: z.string(),
       password: z.string(),
@@ -56,7 +57,7 @@ export async function authRoutes(app: FastifyInstance) {
 
     const comparePasswords = await bcrypt.compare(password, user.password)
 
-    if (!comparePasswords){
+    if (!comparePasswords) {
       return 'Wrong data'
     }
 

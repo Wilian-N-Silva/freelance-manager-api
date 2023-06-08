@@ -8,7 +8,7 @@ import { authRoutes } from './routes/auth';
 import { clientRoutes } from './routes/client';
 
 
-const app = fastify()
+export const app = fastify()
 
 app.register(cors, {
   origin: true,
