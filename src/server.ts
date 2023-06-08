@@ -4,7 +4,7 @@ import fastify from "fastify";
 import cors from '@fastify/cors'
 import jwt from '@fastify/jwt'
 
-import { authRoutes } from './routes/auth';
+import { userRoutes } from './routes/user';
 import { clientRoutes } from './routes/client';
 import { companyRoutes } from './routes/company';
 
@@ -18,7 +18,7 @@ app.register(jwt, {
   secret: 'super',
 })
 
-app.register(authRoutes)
+app.register(userRoutes)
 app.register(companyRoutes)
 app.register(clientRoutes)
 

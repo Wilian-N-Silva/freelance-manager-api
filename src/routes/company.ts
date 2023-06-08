@@ -119,8 +119,6 @@ export async function companyRoutes(app: FastifyInstance) {
       }
     })
 
-
-
     if (company.representativeId !== request.user.sub) {
       return reply
         .code(401)
