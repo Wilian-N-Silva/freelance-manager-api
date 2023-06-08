@@ -15,23 +15,23 @@ export async function authRoutes(app: FastifyInstance) {
     })
 
     if (!user) {
-      reply
+      return reply
         .code(401)
         .header('Content-Type', 'application/json; charset=utf-8')
         .send({ message: '401 - Unauthorized', reason: 'Unable to find user' })
 
-      return
+
     }
 
     const comparePasswords = await bcrypt.compare(password, user.password)
 
     if (!comparePasswords) {
-      reply
+      return reply
         .code(401)
         .header('Content-Type', 'application/json; charset=utf-8')
         .send({ message: '409 - Unauthorized', reason: 'Invalid Credentials' })
 
-      return
+
     }
 
     const token = app.jwt.sign(

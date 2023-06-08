@@ -37,7 +37,7 @@ model Company {
   id                 String   @id @default(uuid())
   representativeId   String
   addressId          String?
-  registrationNumber String
+  registrationNumber String   @unique
   companyName        String
   tradingName        String?
   phone              String?
