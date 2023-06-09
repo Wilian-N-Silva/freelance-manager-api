@@ -1,7 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { prisma } from "../lib/prisma";
 import { z } from "zod"
-import { log } from "console";
 
 export async function clientRoutes(app: FastifyInstance) {
   app.addHook('preHandler', async (request) => {
@@ -182,5 +181,24 @@ export async function clientRoutes(app: FastifyInstance) {
     }
 
     return client
+  })
+
+  app.delete('/client/:id', async (request, reply) => {
+    const paramsSchema = z.object({
+      id: z.string().uuid(),
+    })
+
+    const { id } = paramsSchema.parse(request.params)
+
+    let client = prisma.client.delete({
+      where: {
+        id: id
+      }
+    })
+
+    return reply
+      .code(200)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send({ message: 'Client deleted successfully' })
   })
 }

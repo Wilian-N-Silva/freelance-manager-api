@@ -47,10 +47,8 @@ model Company {
 }
 
 model Client {
-  id String @id @unique @default(uuid())
-
-  isCompany Boolean @default(true)
-
+  id                 String    @id @unique @default(uuid())
+  isCompany          Boolean   @default(true)
   name               String?
   taxPayerRegistry   String?
   registrationNumber String?
@@ -59,6 +57,31 @@ model Client {
   phone              String?
   email              String?
   addressId          String?
+  address            Address?  @relation(fields: [addressId], references: [id])
+  Project            Project[]
+}
 
-  address Address? @relation(fields: [addressId], references: [id])
+model Service {
+  id              String            @id @unique @default(uuid())
+  description     String
+  value           Decimal
+  ProjectServices ProjectServices[]
+}
+
+model Project {
+  id              String            @id @unique @default(uuid())
+  clientId        String
+  name            String
+  description     String?
+  client          Client            @relation(fields: [clientId], references: [id])
+  ProjectServices ProjectServices[]
+}
+
+model ProjectServices {
+  id        String @id @unique @default(uuid())
+  projectId String
+  serviceId String
+
+  project Project @relation(fields: [projectId], references: [id])
+  service Service @relation(fields: [serviceId], references: [id])
 }
