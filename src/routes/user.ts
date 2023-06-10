@@ -41,7 +41,6 @@ export async function userRoutes(app: FastifyInstance) {
       },
     )
 
-
     return {
       token,
     }
