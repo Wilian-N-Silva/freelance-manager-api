@@ -31,6 +31,7 @@ export async function userRoutes(app: FastifyInstance) {
 
     const token = app.jwt.sign(
       {
+        id: user.id,
         name: user.name,
         email: user.email,
       },

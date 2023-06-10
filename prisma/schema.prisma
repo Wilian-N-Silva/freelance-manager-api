@@ -34,16 +34,17 @@ model Address {
 }
 
 model Company {
-  id                 String   @id @default(uuid())
+  id                 String    @id @default(uuid())
   representativeId   String
   addressId          String?
-  registrationNumber String   @unique
+  registrationNumber String    @unique
   companyName        String
   tradingName        String?
   phone              String?
   email              String?
-  user               User     @relation(fields: [representativeId], references: [id])
-  address            Address? @relation(fields: [addressId], references: [id])
+  user               User      @relation(fields: [representativeId], references: [id])
+  address            Address?  @relation(fields: [addressId], references: [id])
+  Service            Service[]
 }
 
 model Client {
@@ -63,10 +64,11 @@ model Client {
 
 model Service {
   id              String            @id @unique @default(uuid())
-  userId          String
+  companyId       String
   description     String
   value           Decimal
   createdAt       DateTime          @default(now())
+  company         Company           @relation(fields: [companyId], references: [id])
   ProjectServices ProjectServices[]
 }
 

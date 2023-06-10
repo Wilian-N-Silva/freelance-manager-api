@@ -8,6 +8,7 @@ import { userRoutes } from './routes/user';
 import { clientRoutes } from './routes/client';
 import { companyRoutes } from './routes/company';
 import { serviceRoutes } from './routes/service';
+import { projectRoutes } from './routes/project';
 
 export const app = fastify()
 
@@ -23,6 +24,7 @@ app.register(userRoutes)
 app.register(companyRoutes)
 app.register(clientRoutes)
 app.register(serviceRoutes)
+app.register(projectRoutes)
 
 
 app.listen({

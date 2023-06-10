@@ -9,14 +9,16 @@ export async function serviceRoutes(app: FastifyInstance) {
 
   app.post('/service', (request, reply) => {
     const bodySchema = z.object({
+      "companyId": z.string().uuid(),
       "description": z.string(),
       "value": z.number(),
     })
 
-    const { description, value } = bodySchema.parse(request.body)
+    const { companyId, description, value } = bodySchema.parse(request.body)
 
     let service = prisma.service.create({
       data: {
+        companyId: companyId,
         description: description,
         value: value
       }
