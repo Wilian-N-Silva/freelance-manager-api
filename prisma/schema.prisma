@@ -63,8 +63,10 @@ model Client {
 
 model Service {
   id              String            @id @unique @default(uuid())
+  userId          String
   description     String
   value           Decimal
+  createdAt       DateTime          @default(now())
   ProjectServices ProjectServices[]
 }
 

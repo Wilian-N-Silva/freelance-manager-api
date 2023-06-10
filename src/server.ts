@@ -7,6 +7,7 @@ import jwt from '@fastify/jwt'
 import { userRoutes } from './routes/user';
 import { clientRoutes } from './routes/client';
 import { companyRoutes } from './routes/company';
+import { serviceRoutes } from './routes/service';
 
 export const app = fastify()
 
@@ -21,6 +22,7 @@ app.register(jwt, {
 app.register(userRoutes)
 app.register(companyRoutes)
 app.register(clientRoutes)
+app.register(serviceRoutes)
 
 
 app.listen({
